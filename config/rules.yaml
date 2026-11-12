@@ -89,7 +89,7 @@ sensitive_paths:
 
 world_writable_dirs: [/tmp/, /var/tmp/, /dev/shm/]
 
-# Indicators of compromise ("confirmed malicious" signatures). These never read the sus/evil labels.
+# Indicators of compromise (high-risk signatures; the tool cannot prove intent). These never read the sus/evil labels.
 ioc:
   log_entries: [/var/log/]
   credential_entries: [/etc/shadow, /etc/passwd, /etc/sudoers, authorized_keys, /etc/ssh/sshd_config, /etc/ld.so.preload]

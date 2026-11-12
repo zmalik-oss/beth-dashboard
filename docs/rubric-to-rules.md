@@ -6,6 +6,12 @@ Terms: an **action group** is a set of events from one host and process, each wi
 **Routine** means the (process, event) or (process, file) pair appeared at least 10 times in the training
 split (`baseline.routine_min_count`, tuned on validation; see `results/FINDINGS.md`). **Non-routine** is the opposite. **Failed** means `returnValue < 0`.
 
+## Wording in the tool's output
+
+The framework's top bands are named "Confirmed malicious". The tool cannot confirm intent, only that a high-risk
+signature occurred, so its reason text says "high-risk indicator" instead (for example "High-risk indicator: modified
+or deleted log files"). The scores and tiers are unchanged. The tables below keep the framework's original band names.
+
 ## Suspicious behavior (max 40)
 
 | Pts | Rubric level | Rule in code |

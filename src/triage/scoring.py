@@ -180,7 +180,7 @@ def score_events(df_feat: pd.DataFrame, bl: Baseline, rules: dict):
 def _reasons(r) -> dict:
     ind = list(r.indicators)
     names = [INDICATOR_TEXT[i] for i in ind]
-    beh = {40: "Confirmed-malicious signature: " + "; ".join(
+    beh = {40: "High-risk indicator: " + "; ".join(
                n for i, n in zip(ind, names) if i in
                ("exec_from_writable_dir", "log_tampering", "credential_file_modified",
                 "kernel_module_loaded", "network_failure_burst", "privilege_escalation")),
@@ -188,17 +188,17 @@ def _reasons(r) -> dict:
            20: "Attempted risky or sensitive action that failed or repeated",
            10: "Unusual activity not seen in the baseline",
            0: "Normal activity for this process"}[r.behavior]
-    prv = {20: "Confirmed privilege escalation alongside other compromise indicators",
+    prv = {20: "Unexpected privilege escalation alongside other high-risk indicators",
            15: "Privilege-changing call or escalation that is not routine for this process",
            10: "Root use by a process that normally runs unprivileged",
            5: "Root use by a process with no baseline",
            0: "Privilege use consistent with baseline"}[r.privilege]
-    res = {20: "Critical file modified successfully and unexpectedly",
+    res = {20: "Critical file modified successfully and not routine for this process; review whether it was authorized",
            15: "Unexpected access (or failed attempt) on a sensitive or critical file",
            10: "Sensitive file accessed, but consistent with baseline",
            5: "Low-sensitivity location touched (for example /tmp)",
            0: "No sensitive resources touched"}[r.resource]
-    sup = {20: "Multiple independent indicators confirm malicious activity",
+    sup = {20: "Multiple independent high-risk indicators in the same action",
            15: "Four or more distinct indicators in the same action",
            10: "Repeated attempts or three distinct indicators",
            5: "One additional indicator beyond the primary one",
